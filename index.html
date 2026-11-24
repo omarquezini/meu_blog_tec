@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu blog tech</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Meu blog tech</h1>
+        <p>Vou compartilhar conhecimentos sobre Qualquer coisa</p>
+    </header>
+
+    <main>
+        <article>
+            <div class="caixa-imagem">
+                <img src="images.png" alt="Logo do blog" class="img-estatica">
+                <img src="pinguim-penguin.gif" alt="Logo animado" class="img-gif">
+            </div>
+            <div>
+                <h2>Meu primeiro post</h2>
+                <p class="artigo-autor">Por: Rafael Marquezini</p>
+                <p>Boas-vindas ao meu novo blog! Aqui vou compartilhar dicas de nada.</p>
+                <button>❤️ <span>0</span></button>
+                <button>👍 <span>0</span></button>
+            </div>
+        </article>
+
+        <article>
+            <div class="caixa-imagem">
+                <img src="images.png" alt="Logo do blog" class="img-estatica">
+                <img src="pinguim-penguin.gif" alt="Logo animado" class="img-gif">
+            </div>
+            <div>
+                <h2>Meu segundo post</h2>
+                <p class="artigo-autor">Por: Rafael Marquezini</p>
+                <p>Boas-vindas ao meu novo blog! Aqui vou compartilhar dicas de programação e curiosidades da área de tecnologia.</p>
+                <button>❤️ <span>0</span></button>
+                <button>👍 <span>0</span></button>
+            </div>
+        </article>
+
+        <article>
+            <div class="caixa-imagem">
+                <img src="images.png" alt="Logo do blog" class="img-estatica">
+                <img src="pinguim-penguin.gif" alt="Logo animado" class="img-gif">
+            </div>
+            <div>
+                <h2>Meu terceiro post</h2>
+                <p class="artigo-autor">Por: Rafael Marquezini</p>
+                <p>Boas-vindas ao meu novo blog! Aqui vou compartilhar dicas de programação e curiosidades da área de tecnologia.</p>
+                <button>❤️ <span>0</span></button>
+                <button>👍 <span>0</span></button>
+            </div>
+        </article>
+
+        <article>
+            <div class="caixa-imagem">
+                <img src="images.png" alt="Logo do blog" class="img-estatica">
+                <img src="pinguim-penguin.gif" alt="Logo animado" class="img-gif">
+            </div>
+            <div>
+                <h2>Meu quarto post</h2>
+                <p class="artigo-autor">Por: Rafael Marquezini</p>
+                <p>Boas-vindas ao meu novo blog! Aqui vou compartilhar dicas de programação e curiosidades da área de tecnologia.</p>
+                <button>❤️ <span>0</span></button>
+                <button>👍 <span>0</span></button>
+            </div>
+        </article>
+
+        <article>
+            <div class="caixa-imagem">
+                <img src="images.png" alt="Logo do blog" class="img-estatica">
+                <img src="pinguim-penguin.gif" alt="Logo animado" class="img-gif">
+            </div>
+            <div>
+                <h2>Meu quinto post</h2>
+                <p class="artigo-autor">Por: Rafael Marquezini</p>
+                <p>Boas-vindas ao meu novo blog! Aqui vou compartilhar dicas de programação e curiosidades da área de tecnologia.</p>
+                <button>❤️ <span>0</span></button>
+                <button>👍 <span>0</span></button>
+            </div>
+        </article>
+
+        <article>
+            <div class="caixa-imagem">
+                <img src="images.png" alt="Logo do blog" class="img-estatica">
+                <img src="pinguim-penguin.gif" alt="Logo animado" class="img-gif">
+            </div>
+            <div>
+                <h2>Meu sexto post</h2>
+                <p class="artigo-autor">Por: Rafael Marquezini</p>
+                <p>Boas-vindas ao meu novo blog! Aqui vou compartilhar dicas de programação e curiosidades da área de tecnologia.</p>
+                <button>❤️ <span>0</span></button>
+                <button>👍 <span>0</span></button>
+            </div>
+        </article>
+    </main>
+
+<script>
+        // --- 1. LÓGICA DO GIF ALEATÓRIO NO HOVER ---
+        const caixas = document.querySelectorAll('.caixa-imagem');
+
+        caixas.forEach(caixaAtual => {
+            caixaAtual.addEventListener('mouseenter', () => {
+                const outrasCaixas = Array.from(caixas).filter(c => c !== caixaAtual);
+
+                if (outrasCaixas.length > 0) {
+                    const indiceAleatorio = Math.floor(Math.random() * outrasCaixas.length);
+                    const caixaSorteada = outrasCaixas[indiceAleatorio];
+                    caixaSorteada.classList.add('ativo-aleatorio');
+                }
+            });
+
+            caixaAtual.addEventListener('mouseleave', () => {
+                caixas.forEach(c => c.classList.remove('ativo-aleatorio'));
+            });
+        });
+
+        // --- 2. LÓGICA DOS BOTÕES E PARTÍCULAS ---
+        const botoes = document.querySelectorAll('article button');
+
+        botoes.forEach(botao => {
+            botao.addEventListener('click', (evento) => {
+                // Aumenta o contador
+                const contador = botao.querySelector('span');
+                let valorAtual = parseInt(contador.textContent);
+                contador.textContent = valorAtual + 1;
+
+                // Descobre qual emoji usar (coração ou joinha)
+                const emoji = botao.textContent.includes('❤️') ? '❤️' : '👍';
+
+                // Pega a posição exata onde o botão está na tela
+                const retangulo = botao.getBoundingClientRect();
+                const centroX = retangulo.left + retangulo.width / 2;
+                const centroY = retangulo.top + retangulo.height / 2;
+
+                // Cria 6 partículas do emoji saindo do botão
+                for (let i = 0; i < 6; i++) {
+                    criarParticulaEmoji(centroX, centroY, emoji);
+                }
+
+                // Cria 5 partículas do GIF flutuando no fundo da tela
+                for (let i = 0; i < 5; i++) {
+                    criarParticulaGifFundo();
+                }
+            });
+        });
+
+        // Função que gera os emojis saindo do botão
+        function criarParticulaEmoji(x, y, emoji) {
+            const particula = document.createElement('span');
+            particula.textContent = emoji;
+            particula.classList.add('particula-botao');
+
+            // Sorteia um espalhamento horizontal entre -50px e +50px
+            const espalhamentoX = (Math.random() - 0.5) * 100;
+            particula.style.setProperty('--deslocamento-x', `${espalhamentoX}px`);
+
+            particula.style.left = `${x}px`;
+            particula.style.top = `${y}px`;
+
+            document.body.appendChild(particula);
+
+            // Remove o elemento da página quando a animação termina
+            setTimeout(() => {
+                particula.remove();
+            }, 900);
+        }
+
+        // Função que gera os mini GIFs no fundo da página em tamanhos variados
+        function criarParticulaGifFundo() {
+            const gif = document.createElement('img');
+            gif.src = 'pinguim-penguin.gif'; // Usa o mesmo arquivo GIF dos posts
+            gif.classList.add('particula-gif-fundo');
+
+            // Sorteia um tamanho aleatório entre 25px (bem pequeno) e 110px (grande)
+            const tamanhoAleatorio = Math.floor(Math.random() * (110 - 25 + 1)) + 25;
+            gif.style.width = `${tamanhoAleatorio}px`;
+            gif.style.height = `${tamanhoAleatorio}px`;
+
+            // Sorteia uma posição aleatória na largura e altura da janela
+            const posX = Math.random() * window.innerWidth;
+            const posY = Math.random() * window.innerHeight;
+            const rotacao = (Math.random() - 0.5) * 60; // Gira levemente entre -30 e +30 graus
+
+            gif.style.left = `${posX}px`;
+            gif.style.top = `${posY}px`;
+            gif.style.setProperty('--rotacao', `${rotacao}deg`);
+
+            document.body.appendChild(gif);
+
+            // Remove o GIF da memória depois que ele desaparece
+            setTimeout(() => {
+                gif.remove();
+            }, 2200);
+        }
+    </script>
+</body>
+</html>

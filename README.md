@@ -1,1 +1,1 @@
-# meu_blog_tec
+# meu-blog-tec
